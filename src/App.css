@@ -1,0 +1,590 @@
+/* src/App.css */
+    body {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      color: #333;
+      line-height: 1.7;
+      transition: background-color 0.3s, color 0.3s; /* Add transition for smooth effect */
+    }
+
+    .dark-mode body {
+      background-color: #1a1a1a;
+      color: #eee;
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      background-color: #fff;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s, box-shadow 0.3s; /* Add transition */
+    }
+
+    .dark-mode .navbar {
+      background-color: #222;
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .navbar-logo a {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #333;
+      text-decoration: none;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .navbar-logo a {
+      color: #fff;
+    }
+
+    .navbar-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar-links a,
+    .navbar-links button {
+      color: #555;
+      text-decoration: none;
+      margin: 0 1.2rem;
+      transition: color 0.3s;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-size: 1rem;
+    }
+
+    .dark-mode .navbar-links a,
+    .dark-mode .navbar-links button {
+      color: #eee;
+    }
+
+    .navbar-links a:hover,
+    .navbar-links button:hover {
+      color: #007bff;
+    }
+
+    /* Hero Section Styles */
+    .hero-section {
+      padding: 5rem 2rem;
+      background-color: #f0f0f0;
+      text-align: center;
+      transition: background-color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .hero-section {
+      background-color: #333;
+    }
+
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #333;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .hero-section h1 {
+      color: #fff;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #555;
+      margin-bottom: 2.5rem;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .hero-section p {
+      color: #ddd;
+    }
+
+    .hero-section .cta-button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 1.2rem 2.5rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .hero-section .cta-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Blog Feed Styles */
+    .blog-feed {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 3rem;
+    }
+
+    .blog-post {
+      background-color: #fff;
+      border-radius: 0.5rem;
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s; /* Add background-color transition */
+    }
+
+    .dark-mode .blog-post {
+      background-color: #2a2a2a;
+      box-shadow: 0 3px 7px rgba(255, 255, 255, 0.1);
+    }
+
+    .blog-post:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .blog-post-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-top-left-radius: 0.5rem;
+      border-top-right-radius: 0.5rem;
+    }
+
+    .blog-post-content {
+      padding: 2rem;
+    }
+
+    .blog-post-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .blog-post-title {
+      color: #fff;
+    }
+
+    .blog-post-excerpt {
+      color: #555;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .blog-post-excerpt {
+      color: #ddd;
+    }
+
+    .blog-post-actions {
+      padding: 1rem 2rem;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: border-color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .blog-post-actions {
+      border-top-color: #444;
+    }
+
+    .blog-post-actions a {
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .blog-post-actions a:hover {
+      color: #0056b3;
+    }
+
+    /* Footer Styles */
+    .footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 2rem;
+      transition: background-color 0.3s, color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .footer {
+      background-color: #1a1a1a;
+      color: #eee;
+    }
+
+    .footer p {
+      font-size: 0.9rem;
+    }
+
+    /* General Styles */
+    a {
+      color: #007bff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #0056b3;
+    }
+
+    /* Dark Mode Toggle */
+    .dark-mode-toggle {
+      background: none;
+      border: none;
+      color: #555;
+      cursor: pointer;
+      font-size: 1.4rem;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .dark-mode-toggle {
+      color: #eee;
+    }
+
+    /* Editor Styles */
+    .post-editor {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: background-color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .post-editor {
+      background-color: #2a2a2a;
+      color: #eee;
+    }
+
+    .post-editor h2 {
+      font-size: 2.4rem;
+      margin-bottom: 1.8rem;
+      color: #333;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .post-editor h2 {
+      color: #fff;
+    }
+
+    .post-editor form label {
+      display: block;
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      color: #555;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .post-editor form label {
+      color: #eee;
+    }
+
+    .post-editor form input[type="text"],
+    .post-editor form input[type="email"],
+    .post-editor form textarea {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      margin-bottom: 1.5rem;
+      border-radius: 0.4rem;
+      border: 1px solid #ced4da;
+      transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Add transition */
+      font-size: 1rem;
+      color: #333;
+      background-color: #fff;
+    }
+
+    .dark-mode .post-editor form input[type="text"],
+    .dark-mode .post-editor form input[type="email"],
+    .dark-mode .post-editor form textarea {
+      border-color: #444;
+      color: #eee;
+      background-color: #333;
+    }
+
+    .post-editor form input[type="text"]:focus,
+    .post-editor form input[type="email"]:focus,
+    .post-editor form textarea:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .post-editor form button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .post-editor form button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Blog Post Detail Styles */
+    .blog-post-detail {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+      transition: background-color 0.3s, color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .blog-post-detail {
+      background-color: #2a2a2a;
+      color: #eee;
+    }
+
+    .blog-post-detail h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1.5rem;
+      color: #333;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .blog-post-detail h2 {
+      color: #fff;
+    }
+
+    .blog-post-detail p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 1.5rem;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .blog-post-detail p {
+      color: #ddd;
+    }
+
+    .blog-post-detail .tags span {
+      background-color: #007bff;
+      color: white;
+      padding: 0.6rem 0.9rem;
+      margin-right: 0.6rem;
+      border-radius: 0.3rem;
+      font-size: 0.9rem;
+    }
+
+    .blog-post-detail button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .blog-post-detail button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Login Page Styles */
+    .login-page {
+      padding: 4rem 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .login-page {
+      background-color: #2a2a2a;
+      color: #eee;
+    }
+
+    .login-page h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #333;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .login-page h2 {
+      color: #fff;
+    }
+
+    .login-page .error {
+      color: #dc3545;
+      margin-bottom: 1.5rem;
+    }
+
+    .login-page .form-group {
+      margin-bottom: 1.8rem;
+      text-align: left;
+    }
+
+    .login-page .form-group label {
+      display: block;
+      margin-bottom: 0.7rem;
+      font-size: 1.1rem;
+      color: #555;
+      transition: color 0.3s; /* Add transition */
+    }
+
+    .dark-mode .login-page .form-group label {
+      color: #eee;
+    }
+
+    .login-page .form-group input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 0.4rem;
+      border: 1px solid #ced4da;
+      transition: border-color 0.3s, background-color 0.3s, color 0.3s; /* Add transition */
+      font-size: 1rem;
+      color: #333;
+      background-color: #fff;
+    }
+
+    .dark-mode .login-page .form-group input {
+      border-color: #444;
+      color: #eee;
+      background-color: #333;
+    }
+
+    .login-page .form-group input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    .login-page button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 0.4rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-size: 1.1rem;
+    }
+
+    .login-page button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-links {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-links a,
+      .navbar-links button {
+        margin: 0.5rem 0;
+      }
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .dark-mode .sidebar {
+      background-color: #2a2a2a;
+      color: #eee;
+    }
+
+    .sidebar h3 {
+      transition: color 0.3s;
+    }
+
+    .dark-mode .sidebar h3 {
+      color: #fff;
+    }
+
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .sidebar li a {
+      display: block;
+      padding: 0.5rem 0;
+      text-decoration: none;
+      color: #555;
+      transition: color 0.3s;
+    }
+
+    .dark-mode .sidebar li a {
+      color: #eee;
+    }
+
+    .sidebar li a:hover {
+      color: #007bff;
+    }
+
+    /* Add dark mode styles for Mui components */
+    .MuiPaper-root {
+      transition: background-color 0.3s, color 0.3s !important;
+    }
+
+    .dark-mode .MuiPaper-root {
+      background-color: #2a2a2a !important;
+      color: #eee !important;
+    }
+
+    .MuiTypography-root {
+      transition: color 0.3s !important;
+    }
+
+    .dark-mode .MuiTypography-root {
+      color: #eee !important;
+    }
+
+    .MuiTextField-root label {
+      transition: color 0.3s !important;
+    }
+
+    .dark-mode .MuiTextField-root label {
+      color: #eee !important;
+    }
+
+    .MuiInputBase-input {
+      transition: color 0.3s !important;
+    }
+
+    .dark-mode .MuiInputBase-input {
+      color: #eee !important;
+    }
+
+    .MuiChip-root {
+      transition: background-color 0.3s, color 0.3s !important;
+    }
+
+    .dark-mode .MuiChip-root {
+      background-color: #333 !important;
+      color: #eee !important;
+    }

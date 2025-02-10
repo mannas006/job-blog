@@ -1,62 +1,89 @@
-import React from 'react';
-    import { Link } from 'react-router-dom';
-    import {
-      Box,
-      Typography,
-      List,
-      ListItem,
-      TextField,
-      Button,
-    } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  Box,
+  Typography,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+} from '@mui/material';
+import { supabase } from '../supabase';
 
-    function Sidebar() {
-      return (
-        <Box className="sidebar" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', mt: 4, p: 3, borderRadius: 2, boxShadow: 1 }}>
-          <Typography variant="h6" component="h3" gutterBottom>
-            Recent Posts
-          </Typography>
-          <List>
-            <ListItem button component={Link} to="#">
-              Recent Post 1
-            </ListItem>
-            <ListItem button component={Link} to="#">
-              Recent Post 2
-            </ListItem>
-            <ListItem button component={Link} to="#">
-              Recent Post 3
-            </ListItem>
-          </List>
+function Sidebar() {
+  const [recentPosts, setRecentPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
-          <Typography variant="h6" component="h3" mt={3} gutterBottom>
-            Popular Categories
-          </Typography>
-          <List>
-            <ListItem button component={Link} to="#">
-              Category 1
-            </ListItem>
-            <ListItem button component={Link} to="#">
-              Category 2
-            </ListItem>
-            <ListItem button component={Link} to="#">
-              Category 3
-            </ListItem>
-          </List>
+  useEffect(() => {
+    const fetchRecentPosts = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('job_posts')
+          .select('id, title')
+          .order('created_at', { ascending: false })
+          .limit(5);
 
-          <Typography variant="h6" component="h3" mt={3} gutterBottom>
-            Newsletter Signup
-          </Typography>
-          <TextField
-            label="Your Email"
-            variant="outlined"
-            size="small"
-            fullWidth
-            margin="normal"
-          />
-          <Button variant="contained" color="primary">
-            Subscribe
-          </Button>
-        </Box>
-      );
-    }
+        if (error) {
+          console.error('Error fetching recent posts:', error);
+        } else {
+          setRecentPosts(data);
+        }
+      } catch (error) {
+        console.error('Error fetching recent posts:', error);
+      }
+    };
 
-    export default Sidebar;
+    const fetchCategories = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('job_posts')
+          .select('category')
+          .distinct()
+          .limit(5);
+
+        if (error) {
+          console.error('Error fetching categories:', error);
+        } else {
+          setCategories(data.map(item => item.category));
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchRecentPosts();
+    fetchCategories();
+  }, []);
+
+  return (
+    <Box className="sidebar" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', mt: 4, p: 3, borderRadius: 2, boxShadow: 1 }}>
+      <Typography variant="h6" component="h3" gutterBottom>
+        Recent Posts
+      </Typography>
+      <List>
+        {recentPosts.map((post) => (
+          <ListItem key={post.id} disablePadding>
+            <ListItemButton component={Link} to={`/post/${post.id}`}>
+              <ListItemText primary={post.title} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+
+      <Typography variant="h6" component="h3" mt={3} gutterBottom>
+        Popular Categories
+      </Typography>
+      <List>
+        {categories.map((category) => (
+          <ListItem key={category} disablePadding>
+            <ListItemButton component={Link} to={`/?category=${category}`}>
+              <ListItemText primary={category} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+}
+
+export default Sidebar;

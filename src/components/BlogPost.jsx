@@ -8,6 +8,7 @@ import {
   Chip,
   Box,
   Paper,
+  Skeleton,
 } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
@@ -15,10 +16,12 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 function BlogPost() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPost = async () => {
+      setLoading(true);
       try {
         const { data, error } = await supabase
           .from('job_posts')
@@ -33,15 +36,13 @@ function BlogPost() {
         }
       } catch (error) {
         console.error('Error fetching data:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPost();
   }, [id]);
-
-  if (!post) {
-    return <div>Post not found</div>;
-  }
 
   const handleEdit = () => {
     navigate(`/edit/${id}`);
@@ -57,52 +58,66 @@ function BlogPost() {
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
       <Paper elevation={3} sx={{ padding: 3 }}>
-        <Typography variant="h4" component="h2" gutterBottom>
-          {post.title}
-        </Typography>
-        <Box sx={{ mb: 2 }} dangerouslySetInnerHTML={{ __html: post.description }} />
+        {loading ? (
+          <>
+            <Skeleton height={50} width="80%" sx={{ mb: 2 }} />
+            <Skeleton height={300} sx={{ mb: 2 }} />
+            <Skeleton height={40} width="50%" sx={{ mb: 2 }} />
+            <Skeleton height={40} width="50%" sx={{ mb: 2 }} />
+            <Skeleton height={40} width="50%" sx={{ mb: 2 }} />
+          </>
+        ) : post ? (
+          <>
+            <Typography variant="h4" component="h2" gutterBottom>
+              {post.title}
+            </Typography>
+            <Box sx={{ mb: 2 }} dangerouslySetInnerHTML={{ __html: post.description }} />
 
-        {post.company_name && (
-          <Typography variant="subtitle1" gutterBottom>
-            Company: {post.company_name}
-          </Typography>
+            {post.company_name && (
+              <Typography variant="subtitle1" gutterBottom>
+                Company: {post.company_name}
+              </Typography>
+            )}
+            {post.location && (
+              <Typography variant="subtitle1" gutterBottom>
+                Location: {post.location}
+              </Typography>
+            )}
+            {post.salary && (
+              <Typography variant="subtitle1" gutterBottom>
+                Salary: {post.salary}
+              </Typography>
+            )}
+
+            <Box sx={{ mt: 2 }}>
+              {post.tags &&
+                post.tags.map((tag, index) => (
+                  <Chip key={index} label={tag} sx={{ mr: 1, mb: 1 }} />
+                ))}
+            </Box>
+
+            <Button
+              variant="outlined"
+              startIcon={<EditIcon />}
+              onClick={handleEdit}
+              sx={{ mt: 3 }}
+            >
+              Edit Post
+            </Button>
+
+            <Button
+              variant="contained"
+              color="success"
+              startIcon={<WhatsAppIcon />}
+              onClick={shareOnWhatsApp}
+              sx={{ mt: 3, ml: 2 }}
+            >
+              Share on WhatsApp
+            </Button>
+          </>
+        ) : (
+          <div>Post not found</div>
         )}
-        {post.location && (
-          <Typography variant="subtitle1" gutterBottom>
-            Location: {post.location}
-          </Typography>
-        )}
-        {post.salary && (
-          <Typography variant="subtitle1" gutterBottom>
-            Salary: {post.salary}
-          </Typography>
-        )}
-
-        <Box sx={{ mt: 2 }}>
-          {post.tags &&
-            post.tags.map((tag, index) => (
-              <Chip key={index} label={tag} sx={{ mr: 1, mb: 1 }} />
-            ))}
-        </Box>
-
-        <Button
-          variant="outlined"
-          startIcon={<EditIcon />}
-          onClick={handleEdit}
-          sx={{ mt: 3 }}
-        >
-          Edit Post
-        </Button>
-
-        <Button
-          variant="contained"
-          color="success"
-          startIcon={<WhatsAppIcon />}
-          onClick={shareOnWhatsApp}
-          sx={{ mt: 3, ml: 2 }}
-        >
-          Share on WhatsApp
-        </Button>
       </Paper>
     </Container>
   );

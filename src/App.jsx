@@ -49,7 +49,6 @@ function App() {
               <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/terms" element={<TermsOfService />} />
               <Route path="/about" element={<About />} />
-              <Route path="*" element={<div>404 Not Found</div>} />
             </Routes>
           </Grid>
           <Grid item xs={12} md={4}>
